@@ -92,7 +92,15 @@ Beside that, CSGOGSI implements standard Event Emitter interfaces.
 | players          | `Array of Player's Object` |
 | observer         | `Observer Object`          |
 | bomb             | `Bomb Object`              |
-| phase_countdowns | `The same as in raw GSI`   |
+| phase_countdowns | `Phase Object`             |
+
+### Phase
+
+| Property      | Type                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------- |
+| phase         | (optional) `'freezetime', 'bomb', 'warmup', 'live', 'over', 'defuse', 'paused', 'timeout_ct'  or 'timeout_t'` |
+| phase_ends_in | `number`                                                                                                      |
+| timeout_team  | (optional) `Team object`                                                                                      |
 
 ### Observer
 
@@ -190,7 +198,7 @@ Beside that, CSGOGSI implements standard Event Emitter interfaces.
 | state      | `"carried" or "planted" or "dropped" or "defused" or "defusing" or "planting" or "exploded"` |
 | countdown? | `string`                                                                                     |
 | player?    | `Player Object`                                                                              |
-| position   | `string`                                                                                     |
+| position   | `number[]`                                                                                   |
 
 #### Team
 
