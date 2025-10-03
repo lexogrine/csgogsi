@@ -1,6 +1,6 @@
 {
 	"name": "csgogsi",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "",
 	"type": "module",
 	"main": "./lib/index.cjs",
@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.36.0",
-		"@types/jest": "^29.5.6",
+		"@types/jest": "^30.0.0",
 		"@types/lodash.merge": "^4.6.9",
 		"@types/node": "^22.18.8",
 		"eslint": "^9.36.0",
