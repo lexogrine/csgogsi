@@ -138,6 +138,7 @@ export type Grenade = DecoySmokeGrenade | FragOrFireBombOrFlashbandGrenade | Inf
 export interface Phase {
 	phase?: 'freezetime' | 'bomb' | 'warmup' | 'live' | 'over' | 'defuse' | 'paused' | 'timeout_ct' | 'timeout_t';
 	phase_ends_in: number;
+	timeout_team?: Team;
 }
 export interface CSGO {
 	provider: I.Provider;

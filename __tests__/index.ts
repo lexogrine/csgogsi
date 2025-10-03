@@ -616,10 +616,31 @@ test('event > bomb: plant listener', () => {
 	expect(callback.mock.calls.length).toBe(1);
 });
 
+test('event > bomb: stop listener', () => {
+	const { GSI, callback } = createGSIAndCallback('bombPlantStop');
+
+	GSI.digest(createGSIPacket({ bomb: { state: 'planting' } }));
+	GSI.digest(createGSIPacket({ bomb: { state: 'carried' } }));
+
+	expect(callback.mock.calls.length).toBe(1);
+});
+
 test('event > bomb: exploded listener', () => {
 	const { GSI, callback } = createGSIAndCallback('bombExplode');
 
 	GSI.digest(createGSIPacket({ bomb: { state: 'planted' } }));
+	GSI.digest(createGSIPacket({ bomb: { state: 'exploded' } }));
+
+	expect(callback.mock.calls.length).toBe(1);
+});
+
+test('event > bomb: exploded listener, empty bomb packet', () => {
+	const { GSI, callback } = createGSIAndCallback('bombExplode');
+	const initial = createGSIPacket();
+	initial.bomb = undefined;
+	GSI.digest(initial);
+	GSI.digest(createGSIPacket({ bomb: { state: 'exploded' } }));
+	GSI.digest(createGSIPacket({ bomb: { state: 'exploded' } }));
 	GSI.digest(createGSIPacket({ bomb: { state: 'exploded' } }));
 
 	expect(callback.mock.calls.length).toBe(1);

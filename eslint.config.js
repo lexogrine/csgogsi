@@ -1,9 +1,11 @@
-const eslint = require('@eslint/js');
-const tseslint = require('typescript-eslint');
+import eslint from '@eslint/js';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import tseslint from 'typescript-eslint';
 
-module.exports = tseslint.config(
+
+export default defineConfig(
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  tseslint.configs.recommended,
   {
     files: ["tsc/*.ts"],
     rules:{
@@ -19,7 +21,5 @@ module.exports = tseslint.config(
         "@typescript-eslint/camelcase":0
     },
   },
-  {
-    ignores: ["types/*", "lib/*", "__tests__", "eslint.config.js"]
-  }
+  globalIgnores(["types/*", "lib/*", "__tests__", "eslint.config.js", "jest.config.js"])
 );

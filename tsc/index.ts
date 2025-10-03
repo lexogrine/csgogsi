@@ -39,6 +39,18 @@ type RoundDamage = {
 	players: RoundPlayerDamage[];
 };
 
+const mapReference: { [mapName: string]: (position: number[]) => 'A' | 'B' } = {
+	de_mirage: position => (position[1]! < -600 ? 'A' : 'B'),
+	de_cache: position => (position[1]! > 0 ? 'A' : 'B'),
+	de_overpass: position => (position[2]! > 400 ? 'A' : 'B'),
+	de_nuke: position => (position[2]! > -500 ? 'A' : 'B'),
+	de_dust2: position => (position[0]! > -500 ? 'A' : 'B'),
+	de_inferno: position => (position[0]! > 1400 ? 'A' : 'B'),
+	de_vertigo: position => (position[0]! > -1400 ? 'A' : 'B'),
+	de_train: position => (position[1]! > -450 ? 'A' : 'B'),
+	de_ancient: position => (position[0]! < -500 ? 'A' : 'B'),
+	de_anubis: position => (position[0]! > 0 ? 'A' : 'B')
+};
 class CSGOGSI {
 	private descriptors: Map<EventNames, EventDescriptor[]>;
 	private maxListeners: number;
@@ -332,7 +344,13 @@ class CSGOGSI {
 			grenades: parseGrenades(raw.grenades),
 			phase_countdowns: {
 				phase: raw.phase_countdowns.phase,
-				phase_ends_in: parseFloat(raw.phase_countdowns.phase_ends_in)
+				phase_ends_in: parseFloat(raw.phase_countdowns.phase_ends_in),
+				timeout_team:
+					raw.phase_countdowns.phase === 'timeout_ct'
+						? teamCT
+						: raw.phase_countdowns.phase === 'timeout_t'
+						? teamT
+						: undefined
 			},
 			auth: raw.auth,
 			map: {
@@ -512,19 +530,7 @@ class CSGOGSI {
 	};
 
 	static findSite(mapName: string, position: number[]) {
-		const realMapName = mapName.substr(mapName.lastIndexOf('/') + 1);
-		const mapReference: { [mapName: string]: (position: number[]) => 'A' | 'B' } = {
-			de_mirage: position => (position[1]! < -600 ? 'A' : 'B'),
-			de_cache: position => (position[1]! > 0 ? 'A' : 'B'),
-			de_overpass: position => (position[2]! > 400 ? 'A' : 'B'),
-			de_nuke: position => (position[2]! > -500 ? 'A' : 'B'),
-			de_dust2: position => (position[0]! > -500 ? 'A' : 'B'),
-			de_inferno: position => (position[0]! > 1400 ? 'A' : 'B'),
-			de_vertigo: position => (position[0]! > -1400 ? 'A' : 'B'),
-			de_train: position => (position[1]! > -450 ? 'A' : 'B'),
-			de_ancient: position => (position[0]! < -500 ? 'A' : 'B'),
-			de_anubis: position => (position[0]! > 0 ? 'A' : 'B')
-		};
+		const realMapName = mapName.substring(mapName.lastIndexOf('/') + 1);
 		if (realMapName in mapReference) {
 			return mapReference[realMapName]!(position);
 		}

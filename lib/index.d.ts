@@ -434,6 +434,7 @@ type Grenade = DecoySmokeGrenade | FragOrFireBombOrFlashbandGrenade | InfernoGre
 interface Phase {
 	phase?: 'freezetime' | 'bomb' | 'warmup' | 'live' | 'over' | 'defuse' | 'paused' | 'timeout_ct' | 'timeout_t';
 	phase_ends_in: number;
+	timeout_team?: Team;
 }
 interface CSGO {
 	provider: Provider;
