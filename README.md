@@ -1,10 +1,4 @@
-![Statements](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)
-![CI](https://img.shields.io/github/actions/workflow/status/osztenkurden/csgogsi/.github/workflows/main.yaml?branch=master)
-![Dependencies](https://img.shields.io/librariesio/github/osztenkurden/csgogsi)
-![Downloads](https://img.shields.io/npm/dm/csgogsi)
-![Version](https://img.shields.io/npm/v/csgogsi)
-
-# CS:GO GSI Digest
+# Lexogrine fork of CS:GO GSI Digest
 
 ## How does it work?
 
@@ -14,13 +8,13 @@ The GSI object takes raw request from CS:GO GSI's system, parses this to more co
 
 ### For Node and React
 
-`npm install csgogsi`
+`npm install @lexogrine/csgogsi`
 
 ## Example #1
 
 ```javascript
 import express from 'express';
-import { CSGOGSI } from 'csgogsi';
+import { CSGOGSI } from '@lexogrine/csgogsi';
 
 const app = express();
 const GSI = new CSGOGSI();
@@ -227,3 +221,13 @@ Beside that, CSGOGSI implements standard Event Emitter interfaces.
 #### Side
 
 `"CT" or "T"`
+
+### Maintainers
+
+This fork is maintained by [Lexogrine](https://lexogrine.com) ([LHM.gg](https://lhm.gg)).
+
+Lexogrine is a premier [Node.js development company] and AI software development house, delivering high-end AI, web, and mobile design services to a global clientele. In addition to bespoke development, Lexogrine provides a suite of innovative applications, such as LHM.gg, designed to transform professional collaboration and streamline industry-specific workflows.
+
+We specialize in cutting-edge AI development, complemented by robust web, mobile, and cloud solutions. Our core tech stack includes TypeScript, Python, LLMs, React, React Native, Node.js, Prisma, Medusa, PyTorch, AWS, and Google Cloud Platform.
+
+With a proven track record spanning over 5 years, Lexogrine has successfully delivered hundreds of projects, empowering businesses and enterprises worldwide with scalable, future-proof technology.

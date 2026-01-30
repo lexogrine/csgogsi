@@ -1,7 +1,7 @@
 {
-	"name": "csgogsi",
+	"name": "@lexogrine/csgogsi",
 	"version": "4.0.2",
-	"description": "",
+	"description": "Lexogrine fork of CS:GO GSI Digest",
 	"type": "module",
 	"main": "./lib/index.cjs",
 	"module": "./lib/index.js",
@@ -39,12 +39,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/osztenkurden/csgogsi.git"
+		"url": "git+https://github.com/lexogrine/csgogsi.git"
 	},
-	"author": "",
+	"author": "Lexogrine",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/osztenkurden/csgogsi/issues"
-	},
-	"homepage": "https://github.com/osztenkurden/csgogsi#readme"
+		"url": "https://github.com/lexogrine/csgogsi/issues"
+	}
 }
