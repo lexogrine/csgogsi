@@ -222,11 +222,9 @@ Beside that, CSGOGSI implements standard Event Emitter interfaces.
 
 `"CT" or "T"`
 
-### Maintainers
+### About
 
-This fork is maintained by [Lexogrine](https://lexogrine.com) ([LHM.gg](https://lhm.gg)).
-
-Lexogrine is a premier [Node.js development company] and AI software development house, delivering high-end AI, web, and mobile design services to a global clientele. In addition to bespoke development, Lexogrine provides a suite of innovative applications, such as LHM.gg, designed to transform professional collaboration and streamline industry-specific workflows.
+**Lexogrine** is a premier [**Node.js development company**](https://lexogrine.com/technologies/nodejs-development) and AI software development house, delivering high-end AI, web, and mobile design services to a global clientele. In addition to bespoke development, Lexogrine provides a suite of innovative applications, such as [LHM.gg](https://lhm.gg), designed to transform professional collaboration and streamline industry-specific workflows.
 
 We specialize in cutting-edge AI development, complemented by robust web, mobile, and cloud solutions. Our core tech stack includes TypeScript, Python, LLMs, React, React Native, Node.js, Prisma, Medusa, PyTorch, AWS, and Google Cloud Platform.
 
