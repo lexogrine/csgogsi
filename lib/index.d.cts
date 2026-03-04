@@ -506,7 +506,7 @@ type RoundDamage = {
     round: number;
     players: RoundPlayerDamage[];
 };
-declare class CSGOGSI {
+declare class CS2GSI {
     private descriptors;
     private maxListeners;
     teams: {
@@ -540,4 +540,4 @@ declare class CSGOGSI {
     static findSite(mapName: string, position: number[]): "A" | "B" | null;
 }
 
-export { type Bomb, type BombRaw, type CSGO, CSGOGSI, type CSGORaw, type DecoySmokeGrenade, type DecoySmokeGrenadeRaw, type Events, type FragOrFireBombOrFlashbandGrenade, type FragOrFireBombOrFlashbandGrenadeRaw, type Grenade, type GrenadeBase, type GrenadeBaseRaw, type GrenadeRaw, type HurtEvent, type InfernoGrenade, type InfernoGrenadeRaw, type KillEvent, type Map, type MapRaw, type Observer, type Orientation, type PhaseRaw, type Player, type PlayerExtension, type PlayerObservedRaw, type PlayerRaw, type PlayersRaw, type Provider, type RawHurt, type RawKill, type Round, type RoundDamage, type RoundInfo, type RoundOutcome, type RoundRaw, type RoundWins, type Score, type Side, type Team, type TeamExtension, type TeamRaw, type Weapon, type WeaponRaw, type WeaponType, didTeamWinThatRound, getHalfFromRound, mapSteamIDToPlayer, parseTeam };
+export { type Bomb, type BombRaw, CS2GSI, type CSGO, type CSGORaw, type DecoySmokeGrenade, type DecoySmokeGrenadeRaw, type Events, type FragOrFireBombOrFlashbandGrenade, type FragOrFireBombOrFlashbandGrenadeRaw, type Grenade, type GrenadeBase, type GrenadeBaseRaw, type GrenadeRaw, type HurtEvent, type InfernoGrenade, type InfernoGrenadeRaw, type KillEvent, type Map, type MapRaw, type Observer, type Orientation, type PhaseRaw, type Player, type PlayerExtension, type PlayerObservedRaw, type PlayerRaw, type PlayersRaw, type Provider, type RawHurt, type RawKill, type Round, type RoundDamage, type RoundInfo, type RoundOutcome, type RoundRaw, type RoundWins, type Score, type Side, type Team, type TeamExtension, type TeamRaw, type Weapon, type WeaponRaw, type WeaponType, didTeamWinThatRound, getHalfFromRound, mapSteamIDToPlayer, parseTeam };

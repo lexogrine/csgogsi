@@ -1,27 +1,27 @@
 import type {
+	BaseEvents,
+	Callback,
 	CSGO,
 	CSGORaw,
+	EventNames,
 	Events,
 	KillEvent,
 	Observer,
 	PlayerExtension,
 	RawKill,
-	Score,
-	TeamExtension,
 	RoundInfo,
-	Callback,
-	EventNames,
-	BaseEvents
+	Score,
+	TeamExtension
 } from './interfaces';
 import type { RawHurt } from './mirv';
 import type { DigestMirvType, HurtEvent } from './parsed';
 import {
+	didTeamWinThatRound,
+	getHalfFromRound,
 	getRoundWin,
 	mapSteamIDToPlayer,
-	parseTeam,
-	getHalfFromRound,
-	didTeamWinThatRound,
-	parseGrenades
+	parseGrenades,
+	parseTeam
 } from './utils.js';
 
 interface EventDescriptor {
@@ -51,7 +51,7 @@ const mapReference: { [mapName: string]: (position: number[]) => 'A' | 'B' } = {
 	de_ancient: position => (position[0]! < -500 ? 'A' : 'B'),
 	de_anubis: position => (position[0]! > 0 ? 'A' : 'B')
 };
-class CSGOGSI {
+class CS2GSI {
 	private descriptors: Map<EventNames, EventDescriptor[]>;
 	private maxListeners: number;
 	teams: {
@@ -334,7 +334,7 @@ class CSGOGSI {
 							bomb.state === 'defused' ||
 							bomb.state === 'defusing' ||
 							bomb.state === 'planting'
-								? CSGOGSI.findSite(
+								? CS2GSI.findSite(
 										raw.map.name,
 										bomb.position.split(', ').map(n => parseFloat(n))
 								  )
@@ -538,50 +538,50 @@ class CSGOGSI {
 	}
 }
 
-export { CSGOGSI, mapSteamIDToPlayer, parseTeam, getHalfFromRound, didTeamWinThatRound, type RoundDamage };
+export { CS2GSI, didTeamWinThatRound, getHalfFromRound, mapSteamIDToPlayer, parseTeam, type RoundDamage };
 
 export type {
+	Bomb,
+	BombRaw,
 	CSGO,
 	CSGORaw,
-	Side,
-	RoundOutcome,
-	WeaponType,
-	Observer,
-	RawHurt,
-	WeaponRaw,
-	TeamRaw,
-	PlayerRaw,
-	PlayerObservedRaw,
-	PlayersRaw,
-	Provider,
-	HurtEvent,
-	RoundWins,
-	MapRaw,
-	RoundRaw,
-	BombRaw,
-	PhaseRaw,
-	Events,
-	Team,
-	Player,
-	Bomb,
-	Map,
-	Round,
-	Score,
-	KillEvent,
-	RawKill,
-	TeamExtension,
-	RoundInfo,
-	PlayerExtension,
-	Orientation,
-	Grenade,
-	GrenadeBaseRaw,
-	GrenadeBase,
 	DecoySmokeGrenade,
 	DecoySmokeGrenadeRaw,
-	InfernoGrenade,
-	InfernoGrenadeRaw,
+	Events,
 	FragOrFireBombOrFlashbandGrenade,
 	FragOrFireBombOrFlashbandGrenadeRaw,
+	Grenade,
+	GrenadeBase,
+	GrenadeBaseRaw,
+	GrenadeRaw,
+	HurtEvent,
+	InfernoGrenade,
+	InfernoGrenadeRaw,
+	KillEvent,
+	Map,
+	MapRaw,
+	Observer,
+	Orientation,
+	PhaseRaw,
+	Player,
+	PlayerExtension,
+	PlayerObservedRaw,
+	PlayerRaw,
+	PlayersRaw,
+	Provider,
+	RawHurt,
+	RawKill,
+	Round,
+	RoundInfo,
+	RoundOutcome,
+	RoundRaw,
+	RoundWins,
+	Score,
+	Side,
+	Team,
+	TeamExtension,
+	TeamRaw,
 	Weapon,
-	GrenadeRaw
+	WeaponRaw,
+	WeaponType
 } from './interfaces';

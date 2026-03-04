@@ -1,6 +1,6 @@
 {
-	"name": "@lexogrine/csgogsi",
-	"version": "4.0.2",
+	"name": "@lexogrine/cs2gsi",
+	"version": "4.0.3",
 	"description": "Lexogrine fork of CS:GO GSI Digest",
 	"type": "module",
 	"main": "./lib/index.cjs",

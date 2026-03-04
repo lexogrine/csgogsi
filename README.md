@@ -8,16 +8,16 @@ The GSI object takes raw request from CS:GO GSI's system, parses this to more co
 
 ### For Node and React
 
-`npm install @lexogrine/csgogsi`
+`npm install @lexogrine/cs2gsi`
 
 ## Example #1
 
 ```javascript
 import express from 'express';
-import { CSGOGSI } from '@lexogrine/csgogsi';
+import { CS2GSI } from '@lexogrine/cs2gsi';
 
 const app = express();
-const GSI = new CSGOGSI();
+const GSI = new CS2GSI();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '10Mb' }));
@@ -46,9 +46,9 @@ app.listen(3000);
 | `on('event', callback)`                                                                      | Sets listener for given event (check them below) | `GSI.on('roundEnd', score => { console.log(score.winner.name); });` |                        |
 | `static findSite(mapName, position)`                                                         | Tries to guess the bombsite of the position      |                                                                     | `A, B, null`           |
 
-CSGOGSI also has MR property, which specifies the MR system for overtimes (used in map.rounds). Default value is 3.
+CS2GSI also has MR property, which specifies the MR system for overtimes (used in map.rounds). Default value is 3.
 
-Beside that, CSGOGSI implements standard Event Emitter interfaces.
+Beside that, CS2GSI implements standard Event Emitter interfaces.
 
 ## Events
 

@@ -9,23 +9,23 @@ import type {
 	PlayerRaw,
 	TeamExtension
 } from '../tsc';
-import { CSGOGSI } from '../tsc';
+import { CS2GSI } from '../tsc';
 import type { Callback } from '../tsc/events';
 import { createGSIPacket, createHurtPacket, createKillPacket } from './data';
 import { testCases } from './data/bombSites';
 
 const createGSIAndCallback = <K extends keyof Events>(eventName: K) => {
-	const callback = jest.fn(() => {});
+	const callback = jest.fn(() => { });
 
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.addListener(eventName, callback as unknown as Callback<K>);
 
 	return { GSI, callback };
 };
 
-test('parser > create CSGOGSI object', () => {
-	const GSI = new CSGOGSI();
+test('parser > create CS2GSI object', () => {
+	const GSI = new CS2GSI();
 	expect(GSI).toBeDefined();
 });
 
@@ -35,12 +35,12 @@ test('parser > throw on bad data', () => {
 		map: {},
 		phase_countdowns: {}
 	} as any;
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 	expect(() => GSI.digest(dummyData)).toThrow();
 });
 
 test('parser > dont parse data in the menu', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const result1 = GSI.digest({ ...createGSIPacket(), allplayers: undefined });
 	const result2 = GSI.digest({ ...createGSIPacket(), map: undefined });
@@ -52,7 +52,7 @@ test('parser > dont parse data in the menu', () => {
 });
 
 test('parser > dont break with no bomb data', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.digest({ ...createGSIPacket(), bomb: undefined });
 	const result = GSI.digest({ ...createGSIPacket(), bomb: undefined });
@@ -62,7 +62,7 @@ test('parser > dont break with no bomb data', () => {
 });
 
 test('parser > clear damage data on new map', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.digest(createGSIPacket({ map: { name: 'de_mirage' } }));
 	GSI.damage = [
@@ -118,8 +118,8 @@ test('parser > remove specific listeners from specific event #3', () => {
 });
 
 test('parser > remove specific listeners fom specific event #4', () => {
-	const callback = jest.fn(() => {});
-	const GSI = new CSGOGSI();
+	const callback = jest.fn(() => { });
+	const GSI = new CS2GSI();
 
 	GSI.removeListener('data', callback);
 
@@ -129,8 +129,8 @@ test('parser > remove specific listeners fom specific event #4', () => {
 });
 
 test('event listener > gets event names', () => {
-	const callback = jest.fn(() => {});
-	const GSI = new CSGOGSI();
+	const callback = jest.fn(() => { });
+	const GSI = new CS2GSI();
 
 	GSI.on('mvp', callback);
 
@@ -157,7 +157,7 @@ test('event listener > gets max listeners', () => {
 
 	const newMax = getRandomArbitrary(1, 10000);
 
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.setMaxListeners(newMax);
 
@@ -183,8 +183,8 @@ test('event listener > gets descriptors', () => {
 });
 
 test('event listener > calls once listeners only once', () => {
-	const callback = jest.fn(() => {});
-	const GSI = new CSGOGSI();
+	const callback = jest.fn(() => { });
+	const GSI = new CS2GSI();
 
 	GSI.once('defuseStart', callback);
 
@@ -207,8 +207,8 @@ test('event listener > prepend listener', () => {
 			i = 2;
 		}
 	};
-	const callback = jest.fn(() => {});
-	const GSI = new CSGOGSI();
+	const callback = jest.fn(() => { });
+	const GSI = new CS2GSI();
 
 	GSI.on('defuseStart', callbackOne);
 
@@ -233,8 +233,8 @@ test('event listener > prepend once listener', () => {
 			i = 2;
 		}
 	};
-	const callback = jest.fn(() => {});
-	const GSI = new CSGOGSI();
+	const callback = jest.fn(() => { });
+	const GSI = new CS2GSI();
 
 	GSI.once('defuseStart', callbackOne);
 
@@ -267,7 +267,7 @@ test('data > assign teams in the first half, left to CT, right to T', () => {
 		extra: {}
 	};
 
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.teams = { left, right };
 
@@ -297,7 +297,7 @@ test('data > assign teams in the second half, left to T, right to CT', () => {
 		extra: {}
 	};
 
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.teams = { left, right };
 
@@ -323,7 +323,7 @@ test('data > assign teams in the second half, left to T, right to CT', () => {
 });
 
 test('data > rounds: proper parser in 1st half', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest(createGSIPacket({ map: { round: 3, team_ct: { score: 2 }, team_t: { score: 1 } } }));
 
@@ -337,7 +337,7 @@ test('data > rounds: proper parser in 1st half', () => {
 });
 
 test('data > rounds: proper parser in 2nd half', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest(
 		createGSIPacket({
@@ -387,7 +387,7 @@ test('data > rounds: proper parser in 2nd half', () => {
 });
 
 test('data > rounds: parser doesnt throw on wrong round wins list', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const dataPacker = createGSIPacket({
 		map: {
@@ -410,7 +410,7 @@ test('data > rounds: parser doesnt throw on wrong round wins list', () => {
 });
 
 test('data > rounds: parser correctly gets just ended round', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest(
 		createGSIPacket({
@@ -436,7 +436,7 @@ test('data > rounds: parser correctly gets just ended round', () => {
 });
 
 test('data > player: dont assign observer if cant find', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest(createGSIPacket({ player: { steamid: 'gotvorincorrect' } }));
 
@@ -456,7 +456,7 @@ test('data > player: assign extension', () => {
 		avatar: 'avatarUrl',
 		extra: {}
 	};
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.players.push(extension);
 
@@ -474,7 +474,7 @@ test('data > player: assign extension', () => {
 });
 
 test('data > round: assign null if doesnt exist', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest({ ...createGSIPacket(), round: undefined });
 
@@ -483,7 +483,7 @@ test('data > round: assign null if doesnt exist', () => {
 });
 
 test('data > bomb: assign null if doesnt exist', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const data = GSI.digest({ ...createGSIPacket(), bomb: undefined });
 
@@ -492,7 +492,7 @@ test('data > bomb: assign null if doesnt exist', () => {
 });
 
 test('data > bomb: undefined player if doesnt exist or not specified', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const gsiPacket = createGSIPacket();
 	delete gsiPacket.bomb?.player;
@@ -507,7 +507,7 @@ test('data > bomb: undefined player if doesnt exist or not specified', () => {
 });
 
 test('data > timeout: doesnt crash on lack of phase', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	GSI.digest({ ...createGSIPacket(), phase_countdowns: { phase_ends_in: '120' } });
 	const result2 = GSI.digest({ ...createGSIPacket(), phase_countdowns: { phase_ends_in: '120' } });
@@ -917,7 +917,7 @@ test('event > kill: get correct assister', () => {
 
 for (const testCase of testCases) {
 	test(`data > bomb: find the correct site (${testCase.map}, ${testCase.site})`, () => {
-		const GSI = new CSGOGSI();
+		const GSI = new CS2GSI();
 
 		expect(
 			GSI.digest(
@@ -947,7 +947,7 @@ test('data > bomb: return null on unknown map', () => {
 	];
 
 	for (const testCase of testCases) {
-		const GSI = new CSGOGSI();
+		const GSI = new CS2GSI();
 
 		expect(
 			GSI.digest(
@@ -961,7 +961,7 @@ test('data > bomb: return null on unknown map', () => {
 });
 
 test('data > damage: clear after first round starts', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const packet = createGSIPacket({
 		map: {
@@ -988,7 +988,7 @@ test('data > damage: clear after first round starts', () => {
 });
 
 test('data > damage: clear on warmup', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const packet = createGSIPacket({
 		map: {
@@ -1015,7 +1015,7 @@ test('data > damage: clear on warmup', () => {
 });
 
 test('data > adr', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 	const roundOne = createGSIPacket({
 		map: {
 			round: 0
@@ -1065,7 +1065,7 @@ test('data > adr', () => {
 });
 
 test('data > grenades > flashbang', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const result = GSI.digest(createGSIPacket());
 
@@ -1079,7 +1079,7 @@ test('data > grenades > flashbang', () => {
 });
 
 test('data > grenades > inferno', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const result = GSI.digest(createGSIPacket());
 
@@ -1093,7 +1093,7 @@ test('data > grenades > inferno', () => {
 });
 
 test('data > grenades > smoke', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const result = GSI.digest(createGSIPacket());
 
@@ -1107,7 +1107,7 @@ test('data > grenades > smoke', () => {
 });
 
 test('data > grenades > none', () => {
-	const GSI = new CSGOGSI();
+	const GSI = new CS2GSI();
 
 	const result = GSI.digest(createGSIPacket({ grenades: null as any }));
 

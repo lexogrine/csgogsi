@@ -1,15 +1,15 @@
 import type {
-	PlayerRaw,
-	Team,
-	PlayerExtension,
-	Player,
-	PlayersRaw,
-	Side,
 	Orientation,
-	TeamExtension,
-	TeamRaw,
+	Player,
+	PlayerExtension,
+	PlayerRaw,
+	PlayersRaw,
 	RoundInfo,
-	RoundWins
+	RoundWins,
+	Side,
+	Team,
+	TeamExtension,
+	TeamRaw
 } from '.';
 import type { GrenadeRaw } from './csgo';
 import type { Grenade } from './parsed';
@@ -137,10 +137,12 @@ export const getRoundWin = (
 	if (mapRound > 2 * regulationMR) {
 		const maxOvertimeRounds =
 			2 * overtimeMR * Math.floor((mapRound - (2 * regulationMR + 1)) / (2 * overtimeMR)) + 2 * regulationMR;
+
 		if (round <= maxOvertimeRounds) {
 			return null;
 		}
 		const roundInOT = ((round - (2 * regulationMR + 1)) % (overtimeMR * 2)) + 1;
+
 		indexRound = roundInOT;
 	}
 	const roundOutcome = roundWins[indexRound];
